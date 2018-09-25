@@ -66,7 +66,7 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'rest_framework',
+    'rest_framework', #Rest frame
 ]
 LOCAL_APPS = [
     'grang.users.apps.UsersAppConfig',
