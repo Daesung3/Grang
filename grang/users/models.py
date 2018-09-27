@@ -26,12 +26,21 @@ class User(AbstractUser):
     bio = models.TextField(null=True)
     phone = models.CharField(max_length=140, null=True)
     gender = models.CharField(max_length=80, choices=GENDER_CHOICES, null=True)
-    subscribers = models.ManyToManyField("self") #구독자 followers
-    subscribe = models.ManyToManyField("self") #구독하기 following
+    subscribers = models.ManyToManyField("self", blank=True) #구독자 followers
+    subscribe = models.ManyToManyField("self", blank=True) #구독하기 following
 
     @python_2_unicode_compatible
     def __str__(self):
         return self.username
 
-    def get_absolute_url(self):
-        return reverse("users:detail", kwargs={"username": self.username})
+    @property
+    def post_count(self):
+        return self.images.all().count()
+
+    @property
+    def subscribers_count(self):
+        return self.subscribers.all().count()
+
+    @property
+    def subscribe_count(self):
+        return self.subscribe.all().count()    

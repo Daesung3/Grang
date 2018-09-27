@@ -67,11 +67,13 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework', #Rest frame
+    'taggit', #Tags for the photos
 ]
 LOCAL_APPS = [
     'grang.users.apps.UsersAppConfig',
     # Your stuff: custom apps go here
     'grang.images.apps.ImagesConfig',
+    'grang.notifications.apps.NotificationsConfig',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -238,3 +240,4 @@ SOCIALACCOUNT_ADAPTER = 'grang.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+TAGGIT_CASE_INSENSITIVE = True

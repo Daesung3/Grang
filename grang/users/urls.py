@@ -1,16 +1,15 @@
+from django.conf.urls import url
 from django.urls import path
+from . import views
 
-from grang.users.views import (
-    user_list_view,
-    user_redirect_view,
-    user_update_view,
-    user_detail_view,
-)
 
 app_name = "users"
 urlpatterns = [
-    path("", view=user_list_view, name="list"),
-    path("~redirect/", view=user_redirect_view, name="redirect"),
-    path("~update/", view=user_update_view, name="update"),
-    path("<str:username>/", view=user_detail_view, name="detail"),
+    path("explore/", view=views.ExploreUsers.as_view(), name="explore_users"),
+    path("<int:user_id>/subscribe/", view=views.SubscribeUser.as_view(), name="subscribe_user"),
+    path("<int:user_id>/unsubscribe/", view=views.UnSubscribeUser.as_view(), name="subscribe_user"),
+    path("<str:username>/subscribers/", view=views.UserSubscribers.as_view(), name="user_subscribers"),
+    path("<str:username>/subscribe/", view=views.UserSubscribe.as_view(), name="user_subscribe"), #following
+    path("search/", view=views.Search.as_view(), name="user_subscribe"),
+    path("<str:username>/", view=views.UserProfile.as_view(), name="user_profile")
 ]
