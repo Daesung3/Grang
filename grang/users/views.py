@@ -7,7 +7,6 @@ from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
 
 
-
 class ExploreUsers(APIView):
 
     def get(self, request, format=None):
