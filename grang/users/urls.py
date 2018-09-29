@@ -11,5 +11,8 @@ urlpatterns = [
     path("<str:username>/subscribers/", view=views.UserSubscribers.as_view(), name="user_subscribers"),
     path("<str:username>/subscribe/", view=views.UserSubscribe.as_view(), name="user_subscribe"), #following
     path("search/", view=views.Search.as_view(), name="user_subscribe"),
-    path("<str:username>/", view=views.UserProfile.as_view(), name="user_profile")
+    path("<str:username>/", view=views.UserProfile.as_view(), name="user_profile"),
+    path("<str:username>/password/", view=views.ChangePassword.as_view(), name="change"),
+    path("login/facebook/", view=views.FacebookLogin.as_view(), name='fb_login')
+
 ]
