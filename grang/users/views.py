@@ -91,7 +91,7 @@ class UserProfile(APIView):
 
         elif found_user.username != user.username:
 
-            return Response(status=status.HTTP_401_UNAUTHORIZED)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
         else:
 
@@ -198,7 +198,7 @@ class ChangePassword(APIView):
 
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response(status=status.HTTP_401_UNAUTHORIZED)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class FacebookLogin(SocialLoginView):
