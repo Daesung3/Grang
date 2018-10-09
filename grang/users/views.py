@@ -13,7 +13,7 @@ class ExploreUsers(APIView):
 
         last_five = models.User.objects.all().order_by('date_joined')[:5]
 
-        serializer = serializers.ListUserSerializer(last_five, many=True)
+        serializer = serializers.ListUserSerializer(last_five, many=True, context={"request": request})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK) 
 
@@ -118,7 +118,7 @@ class UserSubscribers(APIView):
 
         user_subscribers = found_user.subscribers.all()
 
-        serializer = serializers.ListUserSerializer(user_subscribers, many=True)
+        serializer = serializers.ListUserSerializer(user_subscribers, many=True, context={"request": request})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -134,7 +134,7 @@ class UserSubscribe(APIView):
 
         user_subscribe = found_user.subscribe.all()
 
-        serializer = serializers.ListUserSerializer(user_subscribe, many=True)
+        serializer = serializers.ListUserSerializer(user_subscribe, many=True, context={"request": request})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -149,7 +149,7 @@ class Search(APIView):
 
             users = models.User.objects.filter(username__icontains=username)
 
-            serializer = serializers.ListUserSerializer(users, many=True)
+            serializer = serializers.ListUserSerializer(users, many=True, context={"request": request})
 
             return Response(data=serializer.data, status=status.HTTP_200_OK)
 

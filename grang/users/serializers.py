@@ -25,6 +25,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class ListUserSerializer(serializers.ModelSerializer):
 
+    subscribe = serializers.SerializerMethodField()
+
     class Meta:
         model = models.User
         fields = (
@@ -33,3 +35,10 @@ class ListUserSerializer(serializers.ModelSerializer):
             'username',
             'name'
         )
+
+    def get_subscribe(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            if obj in request.user.subscribe.all():
+                return True
+        return False
