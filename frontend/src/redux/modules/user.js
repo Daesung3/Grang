@@ -5,6 +5,9 @@
 const SAVE_TOKEN = "SAVE_TOKEN";
 const LOGOUT = "LOGOUT";
 const SET_USER_LIST = "SET_USER_LIST";
+const SUBSCRIBE_USER = "SUBSCRIBE_USER";
+const UNSUBSCRIBE_USER = "UNSUBSCRIBE_USER";
+const SET_EXPLORE = "SET_EXPLORE";
 
 // action creator
 
@@ -21,18 +24,32 @@ function logout() {
     };
 }
 
-function setUserList(userList) {
+function setUserList(likes) {
     return {
         type: SET_USER_LIST,
-        userList
+        likes
     };
+}
+
+function setSubscribeUser(userId){
+    return {
+        type: SUBSCRIBE_USER,
+        userId
+    }
+}
+
+function setUnsubscribeUser(userId){
+    return {
+        type: UNSUBSCRIBE_USER,
+        userId
+    }
 }
 
 // API actions
 
 function facebookLogin(access_token) {
     return function (dispatch) {
-        fetch("/users/login/facebook/", {
+        fetch(`/users/login/facebook/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -53,7 +70,7 @@ function facebookLogin(access_token) {
 
 function usernameLogin(username, password) {
     return function (dispatch) {
-        fetch("/rest-auth/login/", {
+        fetch(`/rest-auth/login/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -75,7 +92,7 @@ function usernameLogin(username, password) {
 
 function createAccount(username, password, email){
     return function(dispatch) {
-        fetch("rest-auth/registration/", {
+        fetch(`rest-auth/registration/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -116,6 +133,51 @@ function getPhotoLikes(photoId) {
     };
   }
 
+  function subscribeUser(userId){
+      return (dispatch, getState) => {
+          dispatch(setSubscribeUser(userId));
+          const { user: { token } } = getState();
+          fetch(`/users/${userId}/subscribe/`, {
+            method: "POST",
+            headers: {
+                Authorization: `JWT ${token}`,
+                "Content-Type": "application/json"
+            },
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(logout());
+            } else if (!response.ok) {
+                dispatch(setUnsubscribeUser(userId));
+            }
+        })
+      }
+  }
+
+  function unsubscribeUser(userId){
+    return (dispatch, getState) => {
+        dispatch(setUnsubscribeUser(userId));
+        const { user: { token } } = getState();
+        fetch(`/users/${userId}/unsubscribe/`, {
+          method: "POST",
+          headers: {
+              Authorization: `JWT ${token}`,
+              "Content-Type": "application/json"
+          },
+      })
+      .then(response => {
+          if(response.status === 401){
+              dispatch(logout());
+          } else if (!response.ok) {
+              dispatch(setSubscribeUser(userId));
+          }
+      })
+    }
+}
+
+
+  
+
 
 // intial state
 
@@ -134,6 +196,10 @@ function reducer(state = intialState, action) {
             return applyLogout(state, action);
         case SET_USER_LIST:
             return applySetUserList(state, action);
+        case SUBSCRIBE_USER:
+            return applySubscribeUser(state, action);
+        case UNSUBSCRIBE_USER:
+            return applyUnsubscribeUser(state, action);
         default:
             return state;
     }
@@ -158,13 +224,40 @@ function applyLogout(state, action){
     }
 }
 
-function applySetUserList(state, action){
+function applySetUserList(state, action) {
     const { userList } = action;
-    return{
-        ...state,
-        userList
-    }
+    return {
+      ...state,
+      userList
+    };
+  }
+
+function applySubscribeUser(state, action) {
+    const { userId } = action; // userId를 action 불러온다.
+    const { userList } = state;
+    const updatedUserList = userList.map(user => {
+        if(user.id === userId){
+            return {...user, subscribe: true };
+        }
+        return user;
+    });
+    return {...state, userList: updatedUserList}
 }
+
+function applyUnsubscribeUser(state, action) {
+    const { userId } = action; // userId를 action 불러온다.
+    const { userList } = state;
+    const updatedUserList = userList.map(user => {
+        if(user.id === userId){
+            return {...user, subscribe: false };
+        }
+        return user;
+    });
+    return {...state, userList: updatedUserList}
+
+}
+
+
 
 // exports
 
@@ -173,7 +266,9 @@ const actionCreators = {
     usernameLogin,
     createAccount,
     logout,
-    getPhotoLikes
+    getPhotoLikes,
+    subscribeUser,
+    unsubscribeUser
 };
 
 export { actionCreators };

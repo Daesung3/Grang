@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./styles.scss";
 
-const UserDisplay = (props, context) => (
-  <div className={props.horizontal ? styles.horizontal : styles.vertical}>
+const UserRow = (props, context) => (
+  <div className={styles.container}>
     <div className={styles.column}>
       <img
         src={props.user.profile_image || require("images/noPhoto.png")}
@@ -17,28 +17,29 @@ const UserDisplay = (props, context) => (
     </div>
     <span className={styles.column}>
       <button className={styles.button} onClick={props.handleClick}>
-        {props.user.following ? context.t("Unfollow") : context.t("Follow")}
-      </button>
+      {props.user.subscribe ? context.t("UnSubscribe") : context.t("Subscribe")}</button>
     </span>
   </div>
 );
 
-UserDisplay.contextTypes = {
+UserRow.contextTypes = {
   t: PropTypes.func.isRequired
 };
 
-UserDisplay.propTypes = {
+UserRow.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
     profile_image: PropTypes.string,
     username: PropTypes.string.isRequired,
     name: PropTypes.string,
-    following: PropTypes.bool.isRequired
+    subscribe: PropTypes.bool.isRequired
   }).isRequired,
   big: PropTypes.bool,
-  handleClick: PropTypes.func.isRequired,
-  horizontal: PropTypes.bool,
-  vertical: PropTypes.bool
+  handleClick: PropTypes.func.isRequired
 };
 
-export default UserDisplay;
+UserRow.defaultProps = {
+    big: false
+};
+
+export default UserRow;
