@@ -4,6 +4,7 @@ import styles from "./styles.scss";
 import Loading from "components/Loading";
 import FeedPhoto from "components/FeedPhoto";
 
+
 const Feed = props => {
     if(props.loading){
         return <LoadingFeed />
@@ -19,7 +20,9 @@ const LoadingFeed = props => (
 );
 
 const RenderFeed = props => (
-    <div className={styles.feed}>{props.feed.map(photo => <FeedPhoto {...photo} key={photo.id} />)}</div>
+    <div className={styles.feed}>
+        {props.feed.map(photo => <FeedPhoto {...photo} key={photo.id} />)}
+    </div>
 );
 
 Feed.propTypes = {

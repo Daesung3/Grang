@@ -7,9 +7,12 @@ const LOGOUT = "LOGOUT";
 const SET_USER_LIST = "SET_USER_LIST";
 const SUBSCRIBE_USER = "SUBSCRIBE_USER";
 const UNSUBSCRIBE_USER = "UNSUBSCRIBE_USER";
-const SET_EXPLORE = "SET_EXPLORE";
+const GET_CATEGORY = "GET_CATEGORY";
 
-// action creator
+
+
+
+// action creator 동기
 
 function saveToken(token) {
     return {
@@ -45,7 +48,14 @@ function setUnsubscribeUser(userId){
     }
 }
 
-// API actions
+function setCategory(category){
+    return {
+        type: GET_CATEGORY,
+        category
+    }
+}
+
+// API actions 비동기
 
 function facebookLogin(access_token) {
     return function (dispatch) {
@@ -175,6 +185,27 @@ function getPhotoLikes(photoId) {
     }
 }
 
+function getCategory(){
+    return (dispatch, getState) => {
+        const { user: { token } } = getState();
+        fetch(`/users/category`, {
+          method: "GET",
+          headers: {
+              Authorization: `JWT ${token}`,
+              "Content-Type": "application/json"
+          },
+      })
+      .then(response => {
+          if(response.status === 401){
+              dispatch(logout());
+          }
+            return response.json();
+      })
+      .then(json => {
+          dispatch(setCategory(json.category));
+      })
+    }
+}
 
   
 
@@ -200,6 +231,8 @@ function reducer(state = intialState, action) {
             return applySubscribeUser(state, action);
         case UNSUBSCRIBE_USER:
             return applyUnsubscribeUser(state, action);
+        case GET_CATEGORY:
+            return applyGetCategory(state, action);
         default:
             return state;
     }
@@ -257,6 +290,13 @@ function applyUnsubscribeUser(state, action) {
 
 }
 
+function applyGetCategory(state, action) {
+    return {
+        ...state,
+        category : action.category
+    };
+}
+
 
 
 // exports
@@ -268,7 +308,8 @@ const actionCreators = {
     logout,
     getPhotoLikes,
     subscribeUser,
-    unsubscribeUser
+    unsubscribeUser,
+    getCategory
 };
 
 export { actionCreators };

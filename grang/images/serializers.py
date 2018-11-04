@@ -44,7 +44,8 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'message',
-            'creator'
+            'creator',
+            'natural_time'
         )
 
 
@@ -75,7 +76,9 @@ class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
             'creator',
             'tags',
             'natural_time',
-            'is_liked'
+            'created_at',
+            'is_liked',
+            'category'
         )
     
     def get_is_liked(self, obj):

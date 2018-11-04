@@ -28,6 +28,7 @@ class User(AbstractUser):
     gender = models.CharField(max_length=80, choices=GENDER_CHOICES, null=True)
     subscribers = models.ManyToManyField("self", blank=True) #구독자 followers
     subscribe = models.ManyToManyField("self", blank=True) #구독하기 following
+    category = models.CharField(null=True, max_length=255)
 
     @python_2_unicode_compatible
     def __str__(self):

@@ -19,17 +19,17 @@ class Images(APIView):
 
         for subscribe_user in subscribe_users:
 
-            user_images = subscribe_user.images.all()[:2]
+            user_images = subscribe_user.images.all()
 
             for image in user_images:
 
                 image_list.append(image)
 
-        my_images = user.images.all()[:2]
+        my_images = user.images.all()
 
         for image in my_images:
 
-            image_list.append(image)
+            image_list.append(image)    
 
         sorted_list = sorted(
             image_list, key=lambda image: image.created_at, reverse=True)
@@ -266,3 +266,4 @@ class ImageDetail(APIView):
         image.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)    
+

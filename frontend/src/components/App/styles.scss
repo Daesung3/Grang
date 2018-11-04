@@ -1,9 +1,13 @@
 @import "reset-css/reset.css";
 @import url("https://fonts.googleapis.com/css?family=Roboto:300:400,500");
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif:400,700|Roboto:400,700|Noto+Serif+KR:400,700,900');
+
+
 
 body {
-    background-color: $bg-color;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background-color: #325572;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,BrushScript BT, 'Noto Serif KR', sans-serif;
     font-size: $normal-font-size;
 }
 

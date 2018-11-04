@@ -5,7 +5,6 @@ import formStyles from "shared/formStyles.scss";
 
 const SignupForm = (props, context) => (
     <div className={formStyles.formComponent}>
-        <h3>{context.t("Sign up to see photos and videos from your friends.")}</h3>
         <FacebookLogin
                 appId="317296515746406"
                 autoLoad={false}
@@ -13,7 +12,7 @@ const SignupForm = (props, context) => (
                 callback={props.handleFacebookLogin}
                 cssClass={formStyles.facebookLink}
                 icon="fa-facebook-official"
-                textButton={context.t("Log in with Facebook")}
+                textButton={context.t("페이스북으로 시작하기")}
             />
         <span className={formStyles.divider}>or</span>
         <form className={formStyles.form} onSubmit={props.handleSubmit}>
@@ -56,9 +55,9 @@ const SignupForm = (props, context) => (
                 onChange={props.handleInputChange}
                 />
         </form>
-        <p>
-            {context.t("By signing up, you agree to our")} <span>{context.t("Terms & Privacy Policy")}</span>.
-      </p>
+        <p className={formStyles.policy}>
+            {context.t("가입하면 우리 이용 약관 및 개인 정보 보호 정책에 동의하는 것입니다.")}
+        </p>
     </div>
 );
 SignupForm.propTypes = {

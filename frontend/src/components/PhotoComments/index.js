@@ -7,7 +7,7 @@ const PhotoComments = props => (
         <ul className={styles.list}>
             <Comment username={props.creator} comment={props.caption} />
             {props.comments.map(comment => (
-                <Comment username={comment.creator.username} comment={comment.message} key={comment.id} />
+                <Comment username={comment.creator.username} comment={comment.message} natural_time={comment.natural_time} key={comment.id} />
             ))}
         </ul>
     </div>
@@ -17,6 +17,7 @@ const Comment = props => (
     <li className={styles.comment}>
         <span className={styles.username}>{props.username}</span>
         <span className={styles.message}>{props.comment}</span>
+        <span className={styles.natural_time}>{props.natural_time}</span>
     </li>
 )
 
@@ -26,6 +27,7 @@ PhotoComments.propTypes = {
     comments: PropTypes.arrayOf( //피드에서 보이는 댓글 부분
         PropTypes.shape({
             message: PropTypes.string.isRequired,
+            natural_time: PropTypes.string.isRequired,
             creator: PropTypes.shape({
                 propfile_image: PropTypes.string,
                 username: PropTypes.string.isRequired

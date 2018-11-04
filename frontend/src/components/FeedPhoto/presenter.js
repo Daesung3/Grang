@@ -6,14 +6,14 @@ import PhotoComments from "components/PhotoComments";
 import TimeStamp from "components/TimeStamp";
 import CommentBox from "components/CommentBox";
 import UserList from "components/UserList";
+import DetailFeedPhoto from "components/DetailFeedPhoto";
 
 const FeedPhoto = (props, context) => {
-    console.log(props);
     return (
     <div className={styles.feedPhoto}>
         <header className={styles.header}>
             <img
-                src={props.creator.propfile_image || require("images/noPhoto.png")}
+                src={props.creator.profile_image || require("images/noPhoto.png")}
                 alt={props.creator.username}
                 className={styles.image}
             />
@@ -22,7 +22,7 @@ const FeedPhoto = (props, context) => {
                 <span>{props.location}</span>
             </div>
         </header>
-        <img src={props.file} alt={props.caption} />
+        <img className={styles.file} src={props.file} alt={props.caption} />
         <div className={styles.meta}>
             <PhotoActions 
             number={props.like_count} 
@@ -36,9 +36,9 @@ const FeedPhoto = (props, context) => {
                 comments={props.comments}
             />
             <TimeStamp time={props.natural_time} />
-            <CommentBox photoId={props.id}/>
+            {/* <CommentBox photoId={props.id}/> */}
         </div>
-        {props.seeingLikes && <UserList title={context.t("Cock!")} closeLikes={props.closeLikes} />}
+        {props.seeingDetail && <DetailFeedPhoto closeDetail={props.closeDetail} />}
     </div>
     );
 };
@@ -70,7 +70,10 @@ FeedPhoto.propTypes = {
     is_liked: PropTypes.bool.isRequired,
     seeingLikes: PropTypes.bool.isRequired,
     closeLikes: PropTypes.func.isRequired,
-    openLikes: PropTypes.func.isRequired
+    openLikes: PropTypes.func.isRequired,
+    seeingDetail: PropTypes.bool.isRequired,
+    openDetail: PropTypes.func.isRequired,
+    closeDetail: PropTypes.func.isRequired
 };
 
 export default FeedPhoto;

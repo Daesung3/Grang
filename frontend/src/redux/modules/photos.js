@@ -9,8 +9,8 @@ const LIKE_PHOTO = "LIKE_PHOTO";
 const UNLIKE_PHOTO = "UNLIKE_PHOTO";
 const ADD_COMMENT = "ADD_COMMENT";
 const SET_PHOTO_LIKES = "SET_PHOTO_LIKES";
-
-// action creators
+const GET_DETAIL = "GET_DETAIL";
+// action creators actionType과 새로 받는 변화의 값을 받아옴.
 
 function setFeed(feed){
     return {
@@ -49,6 +49,13 @@ function setPhotoLikes(photoId, likes){
     };
 }
 
+function getDetail(photoId){
+    return {
+        type: GET_DETAIL,
+        photoId
+    }
+}
+
 // api actions
 
 function getFeed() {
@@ -65,7 +72,14 @@ function getFeed() {
             }
             return response.json();
         })
-        .then(json => dispatch(setFeed(json)));
+        .then(json => {
+            const yesterday = new Date();
+            yesterday.setDate(-1);
+            const feeds = json.filter( item => {
+                return new Date(item.created_at) >= yesterday;
+            });
+            dispatch(setFeed(feeds));
+        })
     };
 }
 
@@ -157,7 +171,23 @@ function getPhotoLikes(photoId){
         });
     }
 }
-// initial state
+
+function getDetail(photoId){
+    return (dispatch, getState) => {
+        const { user: { token } } = getState(); //getState에서 user의 token을 받아옴.
+        fetch(`/images/${photoId}/`, {
+            method: "GET",
+            headers: {
+                Authorization: `JWT ${token}`,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(json => console.log(json));
+    }
+}
+
+// initial state 초깃값 설정
 
 const initialState = {};
 
@@ -175,6 +205,8 @@ function reducer(state = initialState, action) {
             return applyAddComment(state, action);
         case SET_PHOTO_LIKES:
             return applyPhotoLikes(state, action);
+        case GET_DETAIL:
+            return applyGetDetail(state, action);
         default:
         return state;
     }
@@ -244,6 +276,10 @@ function applyPhotoLikes(state, action) {
     return { ...state, feed: updatedFeed };
 }
 
+function applyGetDetail(state, action){
+    const { photoId } = action;
+}
+
 // exports
 
 const actionCreators = {
@@ -251,7 +287,8 @@ const actionCreators = {
     likePhoto,
     unlikePhoto,
     commentPhoto,
-    getPhotoLikes
+    getPhotoLikes,
+    getDetail
 };
 
 export { actionCreators };

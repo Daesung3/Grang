@@ -28,6 +28,7 @@ class ImageAdmin(admin.ModelAdmin):
         'creator',
         'created_at',
         'updated_at',
+        'now'
     )
 
 @admin.register(models.Like)

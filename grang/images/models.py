@@ -3,6 +3,8 @@ from django.utils.encoding import python_2_unicode_compatible
 from taggit.managers import TaggableManager
 from grang.users import models as user_models
 from django.contrib.humanize.templatetags.humanize import naturaltime
+from datetime import timedelta
+import datetime
 
 
 @python_2_unicode_compatible
@@ -10,6 +12,7 @@ class TimeStampedModel(models.Model):
 
      created_at = models.DateTimeField(auto_now_add=True) #처음 애드 되었을 때만 설치 1-20
      updated_at = models.DateTimeField(auto_now=True)
+     
 
      class Meta:
         abstract = True
@@ -25,6 +28,8 @@ class Image(TimeStampedModel):
     caption = models.TextField()
     creator = models.ForeignKey(user_models.User, on_delete=models.CASCADE, null=True, related_name='images')
     tags = TaggableManager()
+    category = models.CharField(null=True, max_length=255)
+    now = datetime.datetime.now()
 
     @property
     def like_count(self):
@@ -55,6 +60,10 @@ class Comment(TimeStampedModel): #댓글
 
     def __str__(self):
         return self.message
+
+    @property
+    def natural_time(self):
+        return naturaltime(self.created_at)
 
 @python_2_unicode_compatible
 class Like(TimeStampedModel):    

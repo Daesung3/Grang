@@ -1,0 +1,369 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR');
+@font-face{
+    font-family: BrushScript BT;
+    src:url(../brushscript-bt/BrushScriptBT.ttf);
+}
+*{margin: 0; padding: 0; border: 0;}
+*:focus{outline: none;}
+ul, ol{list-style: none;}
+a{text-decoration: none; outline: none;}
+img{border: none;}
+body{
+    width: 100%;
+    height: 13000px;
+    font-size: 12px;
+	min-height: 100%;
+	font-family: 'Noto Serif KR', sans-serif;
+}
+.blind{position: absolute; font-size: 0; line-height: 0; text-indent: -99999px;}
+
+/*svg*/
+.st0{font-family: 'Charmonman', cursive;}
+.st1{font-size:169.0211px;}
+
+.visual{
+	position: relative;
+	background-color: #f1f8ff;
+	z-index: 80;
+}
+
+.svg_wrap{
+	width: 100%;
+	height: 500px;
+	background: rgba(234,216,207,0.7);
+	position: absolute;
+	display: block;
+	padding: 16% 0;
+}
+
+.svg_wrap > svg{
+	width: 1000px;
+	height: 500px;
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	margin-left: -400px;
+}
+
+.main_text{
+	width: 650px;
+	color: #422938;
+	position: absolute;
+	top: 70%;
+	left: 50%;
+	margin-left: -325px;
+	font-size: 1.7em;
+	text-align: center;
+}
+
+#bg{
+	width: 100%;
+	height: 100%;
+	background: #EADBD9;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+/*로고*/
+.logo{
+    width: 170px;
+    height: 80px;
+    font-size: 4em;
+	color: #422938;
+    position: fixed;
+    top: 10px;
+    left: 30px;
+	z-index: 2;
+	font-family: BrushScript BT;
+}
+
+figure{
+	width: 200px;
+	height: 50px;
+	border: 1.2px solid #784950;
+	border-radius: 20px;
+	position: absolute;
+	top: 10%;
+	right: 10%;
+	margin-right: 50px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 20pt;
+	font-weight: bold;
+	z-index: 2;
+}
+
+figure p, span{
+	color: #784950;
+}
+
+/*스크롤 네비게이션*/
+.scrollNavi{
+	position:fixed; 
+	left:100px; 
+	top:300px; 
+	z-index:2;
+}
+
+.scrollNavi li{
+	position:relative; 
+	width:150px; 
+	height:35px; 
+	margin-bottom:20px; 
+	font-size:12px;  
+	text-align:center; 
+	perspective:400px;
+	cursor: pointer;
+}
+
+.scrollNavi li em{
+	position: absolute; 
+	top: 8px; 
+	left: 20px; 
+	font-size: 14px; 
+	font-weight: bold; 
+	color: #422938; 
+	text-shadow: 1px 1px 1px #bbb;
+}
+
+.scrollNavi li span{
+	display:block; 
+	width:3%; 
+	height:100%; 
+	position:absolute; 
+	transform:skewX(-20deg); 
+	box-shadow:1px 1px 1px #000;
+}
+
+.scrollNavi li.on span{
+	width:100%;
+}
+
+.scrollNavi li span{
+	background: #C29C9C;
+	opacity: 0.6;
+}
+
+/*버튼*/
+.btn{
+	width: 1200px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -600px;
+}
+
+.btn a{
+	width: 30%;
+	margin: 0 40px 0 70px;
+	transition: all 0.5s;
+	position: relative;
+	z-index: 1;
+}
+
+.btn a img{
+	width: 180px;
+}
+
+/*박스 그룹 레이아웃*/
+section{
+	width: 100%;
+	height: 100%;
+	position:fixed;
+	perspective:2300px; 
+	z-index:1; 
+}
+
+section>article{
+	width: 100%; 
+	height: 100%; 
+	position:absolute;
+	top:0px; 
+	left:0px; 
+	z-index:8;
+}
+
+section>article.on{
+	z-index:9;
+}
+
+section>article:nth-child(1){
+	transform:translateZ(0px);
+}
+
+section>article:nth-child(2){
+	transform:translateZ(-5000px);
+}
+
+section>article:nth-child(3){
+	transform:translateZ(-10000px);
+}
+
+.page{
+	background: #eee;
+	position: relative;
+}
+
+#svg2{
+	width: 600px;
+	height: 400px;
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	margin-left: -300px;
+}
+
+.page .content{
+	width: 700px;
+    height: 200px;
+	margin-left: -350px;
+    position: absolute;
+    top: 20%;
+	left: 50%;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 200px;
+    font-size: 13pt;
+	z-index: 10;
+}
+
+.page .content.on{
+	display: block;
+}
+
+.page .content.off{
+	display: none;
+}
+
+/*회원가입*/
+#start{
+	position: relative;
+}
+
+#start h2{
+	width: 500px;
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	margin-left: -250px;
+	text-align: center;
+	font-size: 25pt;
+}
+
+#join_form{
+	width: 373px;
+	height: 300px;
+	position: absolute;
+	top: 50%;
+	left: 67%;
+	margin-left: -250px;
+	margin-top: -120px;
+}
+
+#join_form input{
+	width: 100%;
+	height: 60px;
+	font-size: 1.8em;
+	background: none;
+	border-bottom: 1px dotted #000;
+	font-family: 'Noto Serif KR', sans-serif;
+}
+
+#join_form input:focus{
+	border-bottom: 1.5px dotted brown;
+}
+
+#login h2{
+	width: 500px;
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	margin-left: -250px;
+	text-align: center;
+	font-size: 25pt;
+}
+
+#login_form{
+	width: 373px;
+	height: 300px;
+	position: absolute;
+	top: 50%;
+	left: 67%;
+	margin-top: -70px;
+	margin-left: -250px;
+}
+
+#login_form input{
+	width: 100%;
+	height: 60px;
+	font-size: 1.8em;
+	background: transparent;
+	border-bottom: 1px dotted #000;
+	font-family: 'Noto Serif KR', sans-serif;
+}
+
+#login_form input:focus{
+	border-bottom: 1.5px dotted brown;
+}
+
+/*footer*/
+#footer{
+	width: 100%;
+	position: fixed;
+	bottom: 5px;
+	z-index: 2;
+}
+
+#footer span{
+	display: inline-block;
+	width: 49%;
+	text-align: center;
+}
+
+/*아침 테마*/
+#bg.morning{background: #F9D5D3;}
+section>article.morning{background: #F9D5D3;}
+
+/*오후 테마*/
+#bg.afternoon{background: #ECA4A6;}
+section>article.afternoon{background: #ECA4A6;}
+
+/*저녁 테마*/
+#bg.evening{background: #99A89E;}
+section>article.evening{background: #99A89E;}
+
+/*밤 테마*/
+#bg.night{background: #807F89;}
+section>article.night{background: #807F89;}
+
+/*버튼 별 테마*/
+.page.person1{
+	background: url(../images/bg_1.jpg) no-repeat center top;
+}
+
+.page.person2{
+	background: url(../images/bg_2.jpg) no-repeat center top;
+}
+
+.page.person3{
+	background: url(../images/bg_3.jpg) no-repeat center top;
+}
+
+.page.person4{
+	background: url(../images/bg_1.jpg) no-repeat center top;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

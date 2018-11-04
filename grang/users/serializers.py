@@ -8,6 +8,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
     post_count = serializers.ReadOnlyField() #ReadOnlyField >> 해당 모델은 수정하지 않겠다!
     subscribers_count = serializers.ReadOnlyField()
     subscribe_count = serializers.ReadOnlyField()
+    is_self = serializers.SerializerMethodField()
+    subscribe = serializers.SerializerMethodField()
 
     class Meta:
         model = models.User
@@ -20,8 +22,29 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'post_count',
             'subscribers_count',
             'subscribe_count',
-            'images'
+            'images',
+            'is_self',
+            'subscribe',
+            'category'
         )
+
+    def get_is_self(self, user):
+        if 'request' in self.context:
+            request = self.context['request']
+            if user.id == request.user.id:
+                return True
+            else:
+                return False
+        return False
+
+    def get_subscribe(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            if obj in request.user.subscribe.all():
+                return True
+        return False
+
+    
 
 class ListUserSerializer(serializers.ModelSerializer):
 

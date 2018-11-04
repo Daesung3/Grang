@@ -203,3 +203,10 @@ class ChangePassword(APIView):
 
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter
+
+class GetCategory(APIView):
+
+    def get(self, request):
+        return Response(data={'category': request.user.category}, status=status.HTTP_200_OK)
+
+#def post():

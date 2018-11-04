@@ -17,29 +17,35 @@ const Navigation = (props, context) => (
                  </Link>
             </div>
             <div className={styles.column}>
-                <input
-                 type="text"
-                 placeholder={context.t("Search")}
-                 className={styles.searchInput}
-                />
-            </div>
-            <div className={styles.column}>
                 <div className={styles.navIcon}>
-                    <Link to="/explore">
-                        <Ionion icon="ios-compass-outline" fontSize="28px" color="black" />
+                    <Link to="/changecategory" alt="Change_Category">
+                        <Ionion icon="ios-sync" fontSize="28px" color="#FCD15A"/>
                     </Link>
                 </div>
                 <div className={styles.navIcon}>
-                        <Ionion icon="ios-heart-outline" fontSize="28px" color="black" />
+                    <Link to="/search" alt="Search">
+                        <Ionion icon="md-search" fontSize="28px" color="#FCD15A"/>
+                    </Link>
+                </div>
+                <div className={styles.navIcon}>
+                    <Link to="/add">
+                        <Ionion icon="md-add" fontSize="28px" color="#FCD15A" />
+                    </Link>
                 </div>
                 <div className={styles.navIcon}>
                     <Link to="/profile">
-                        <Ionion icon="ios-person-outline" fontSize="32px" color="black" />
+                        <Ionion icon="md-person" fontSize="32px" color="#FCD15A" />
+                    </Link>
+                </div>
+                <div className={styles.navIcon}>
+                    <Link to="/logout"> {/*/11*/}
+                        <Ionion icon="md-log-out" fontSize="28px" color="#FCD15A" />
                     </Link>
                 </div>
             </div>
         </div>
-        
+            
+
     </div>
 );
 
@@ -49,5 +55,7 @@ const Navigation = (props, context) => (
 Navigation.contextTypes = {
     t: PropTypes.func.isRequired //context는 번역을 위한 것
 }
+
+
 
 export default Navigation;

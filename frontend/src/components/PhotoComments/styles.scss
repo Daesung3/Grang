@@ -5,11 +5,16 @@
 }
 .comment {
     margin-bottom: 7px;
+    color: #FCD15A;
     .username {
         font-weight: 600;
         margin-right: 10px;
     }
     .message {
 
+    }
+    .natural_time {
+        text-align: right;
+        font-size: 5px;
     }
 }

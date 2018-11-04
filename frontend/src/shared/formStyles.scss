@@ -1,8 +1,11 @@
 .form-component {
+    margin-left: 130px;
+    margin-right: 130px;
     margin-top: 5px;
     display: flex;
     flex-direction: column;
     margin-bottom: 25px;
+    color: $contents-color;
     .form {
       display: flex;
       flex-direction: column;
@@ -10,18 +13,26 @@
         margin-top: 10px;
       }
       .text-input {
-        border: 1px solid #efefef;
-        border-radius: 3px;
-        background-color: $bg-color;
+        text-align: center;
+        border: 1px solid #325572;
+        background-color: #325572;
         margin-bottom: 5px;
         font-size: $normal-font-size;
         padding: 9px 0 7px 8px;
         font-weight: 400;
+        border-bottom: 1px solid $contents-color;
+        color: $contents-color;
         &:focus {
           outline: none;
-          border: 1px solid #b2b2b2;
+          border-bottom: 3px ridge $contents-color;
         }
       }
+    }
+    .policy {
+      margin-top : 15px;
+      line-height:1.8em;
+      font-family: 'Noto Serif KR';
+      color: $contents-color;
     }
     .button {
       @include blueButton();
@@ -29,20 +40,21 @@
         font-size: 18px;
         margin-right: 10px;
       }
-      background-color: #4D6BB8; // Login Button Color
+      background-color: $contents-color; // Login Button Color
     }
     .divider {
       text-transform: uppercase;
-      color: $dark-grey;
+      color: $contents-color;
       font-weight: 600;
       margin: 20px 0;
       margin-bottom: 20px;
       position: relative;
+      text-align: center;
       &:before {
         content: "";
         width: 42%;
         position: absolute;
-        background-color: $dark-grey;
+        background-color: $contents-color;
         height: 1px;
         left: 0;
         top: 6px;
@@ -52,7 +64,7 @@
         content: "";
         width: 42%;
         position: absolute;
-        background-color: $dark-grey;
+        background-color: $contents-color;
         height: 1px;
         right: 0;
         top: 6px;
@@ -60,23 +72,33 @@
       }
     }
     .facebookLink {
-      color: #385185;
-      justify-content: center;
-      margin-bottom: 30px;
-      cursor: pointer;
-      border:0;
-      background-color: white;
-      font-size: $small-font-size;
-      i {
+      margin-top: 15px;
+      width: 250px;
+      height: 40px;
+      background-color: $contents-color;
+      font-size: 15px;
+      border-radius: 5px;
+      border: none;
+      text-align: center;
+      color: white;
+      font-weight: 600px;
+      i{
         margin-right: 5px;
       }
-      &:focus,
-      &:active{
-        outline: none;
-      }
     }
-    .forgotLink {
-      font-size: $small-font-size;
-      color: $dark-blue;
+    .facebookLogin {
+      margin-top: 15px;
+      width: 250px;
+      height: 40px;
+      background-color: $contents-color;
+      font-size: 15px;
+      border-radius: 5px;
+      border: none;
+      text-align: center;
+      color: white;
+      font-weight: 600px;
+      i{
+        margin-right: 5px;
+      }
     }
   }

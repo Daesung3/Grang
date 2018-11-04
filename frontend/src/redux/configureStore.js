@@ -1,3 +1,5 @@
+//user.js나 photo.js등의 여러개의 리듀서를 가지고 여기에 스토어를 만듬!!
+
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { routerReducer, routerMiddleware } from "react-router-redux";

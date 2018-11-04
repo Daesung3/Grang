@@ -7,6 +7,8 @@ import Auth from "components/Auth";
 import Navigation from "components/Navigation";
 import Feed from "components/Feed";
 import Explore from "components/Explore";
+import DetailFeedPhoto from "components/DetailFeedPhoto";
+import ChangeCategory from "components/ChangeCategory";
 
 
 const App = props => [
@@ -23,6 +25,8 @@ const PrivateRoutes = props => (
     <Switch>
         <Route exact path="/" component={Feed} />
         <Route exact path="/explore" component={Explore} />
+        <Route exact path="/images/3/" component={DetailFeedPhoto} />
+        <Route exact path="/changecategory/" component={ChangeCategory} />
     </Switch>
 );
 

@@ -4,6 +4,8 @@
     @include boxBorder(no);
     justify-content: center;
     margin-bottom: 60px;
+    background-color: #325572;
+    border: none;
     .inner {
         max-width: $max-page-width;
         display: flex;
@@ -46,6 +48,7 @@
             .nav-icon {
                 margin-left: 30px;
                 cursor: pointer;
+                color: #FCD15A;
             }
         }
     }

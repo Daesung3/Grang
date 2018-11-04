@@ -24,8 +24,7 @@ const LoginForm = (props, context) => (
             />
             <input type="submit" value={context.t("Log in")} className={formStyles.button} />
         </form>
-        <span className={formStyles.divider}>{context.t("or")}</span>
-        <span className={formStyles.facebookLink}>
+        <div className={formStyles.FacebookLogin}>
             <FacebookLogin
                 appId="317296515746406"
                 autoLoad={false}
@@ -33,9 +32,9 @@ const LoginForm = (props, context) => (
                 callback={props.handleFacebookLogin}
                 cssClass={formStyles.facebookLink}
                 icon="fa-facebook-official"
+                textButton={context.t("페이스북으로 로그인")}
             />
-        </span>
-            <span className={formStyles.forgotLink}>{context.t("Forgot password?")}</span>
+        </div>
     </div>
         );
         

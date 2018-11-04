@@ -1,7 +1,9 @@
 .feed-photo {
+    margin-top: 30px;
     @include boxBorder(yes);
     width: 100%;
     max-width: $max-card-width;
+    background-color: #325572;
     @include breakpoint("phone"){
         background-color: transparent;
         border: 0;
@@ -10,13 +12,18 @@
     &:last-child {
         margin-bottom: 0;
     }
+    .file{
+        width:100%
+    } 
     .header {
+        color: $contents-color;
         padding: 15px;
         display: flex;
         align-items: center;
         border-bottom: 1px solid $border-color;
         .image {
             width: 30px;
+            height: 30px;
             border-radius: 50%;
             margin-right: 15px;
         }
