@@ -5,6 +5,7 @@ from . import models, serializers
 from grang.users import models as user_models
 from grang.users import serializers as user_serializers
 from grang.notifications import views as notification_views
+from django import forms
 
 
 class Images(APIView):
@@ -212,6 +213,29 @@ class ImageDetail(APIView):
             return image
         except models.Image.DoesNotExist:
             return None
+
+    def post(self, request, format=None): #이미지 수정하기 #1-65
+
+        user = request.user
+
+        print(request.POST)
+        print(requeset.FILES)
+
+        serializer = serializers.InputImageSerializer(image, data=request.data, partial=True)
+
+        #partial = True 무조건 채워야하는 필드가 비어있더라도, 이전에 해당 필드가 차있었다면 그것을 차용한다는 의미이다.
+
+        if serializer.is_valid():
+
+            serializer.save(creator=user)
+
+            return Response(data=serializer.data, status=status.HTTP_204_NO_CONTENT)
+
+        else:
+
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
     def get(self, request, image_id, format=None):

@@ -1,11 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
+import styles from './styles.scss'
+// constructor >> render >> componentDidMount
+// props : 부모, index로부터 받는거 , state : 내가 가진거
 
-const ChangeCategory = (props) => {
+class ChangeCategory extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            category: this.props.category
+        }
+    }
+
+    handleSubmit = e => {
+        e.preventDefault();
+        const { onSubmit } = this.props;
+    }
+    handleChange = ({ target : { value, name } }) => {
+        this.setState({ [name]: value })
+    }
+
+
+    render() {
     return (
-        <div>
-            {props.category}
+        <div className={styles.form}>
+            <div className={styles.nowCategory}>
+                <h3>Now Category!</h3>
+                {this.props.category}
+            </div>
+            <div className={styles.formComponent}>
+                <form className={styles.form} onSubmit={this.props.handleChange} >
+                    <input className={styles.input}
+                    type="text"
+                    placeholder={"Category"}
+                    name="category"
+                    />
+                    <input className={styles.submit}
+                    type="submit"
+                    value="Change Category">
+                    </input>
+                </form>
+            </div>
         </div>
+        
+
     )
+    }
 }
 
 export default ChangeCategory;

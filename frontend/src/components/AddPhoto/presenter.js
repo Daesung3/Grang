@@ -29,6 +29,7 @@ class AddPhoto extends Component {
           <input type="text" placeholder="location" name='location' />
           <input type="text" placeholder="caption" name='cation' />
           <input type="text" placeholder="category" name='category' />
+          <input type="text" placeholder="tag" name='tag' />
           <input type="file" name='file' />
           <input type="submit" />
         </form>

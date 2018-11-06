@@ -11,7 +11,7 @@ class ImageAdmin(admin.ModelAdmin):
     )
 
     search_fields = (
-        'location', #검색을 만들 수 있음! 미쳤다리~
+        'location', 
         'caption',
     )
 
