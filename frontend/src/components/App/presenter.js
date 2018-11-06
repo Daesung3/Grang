@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import './styles.scss';
 import Footer from "components/Footer";
 import Auth from "components/Auth";
@@ -29,6 +29,7 @@ const PrivateRoutes = props => (
         <Route exact path="/images/3/" component={DetailFeedPhoto} />
         <Route exact path="/changecategory/" component={ChangeCategory} />
         <Route exact path="/add" component={AddPhoto} />
+        <Redirect to="/" />
     </Switch>
 );
 
@@ -36,6 +37,7 @@ const PublicRoutes = props => (
     <Switch>
         <Route exact path="/" component={Auth} />
         <Route exact path="/forgot" render={() => "password"} />
+        <Redirect to="/" />
     </Switch>
 );
 

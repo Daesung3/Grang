@@ -5,7 +5,7 @@ import { actionCreators as userActions } from "redux/modules/user";
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         logouthandler: () => {
-                dispatch(userActions.dologout())
+                dispatch(userActions.logout())
     }
 };
 }
