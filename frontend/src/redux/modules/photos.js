@@ -188,10 +188,9 @@ function getDetail(photoId){
 }
 
 function postPhoto(formData){
-    console.log(formData);
     return (dispatch, getState) => {
         const { user: { token } } = getState(); //getState에서 user의 token을 받아옴.
-        fetch('/images', {
+        fetch('/images/', {
             method: "POST",
             headers: {
                 Authorization: `JWT ${token}`,
