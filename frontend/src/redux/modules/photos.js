@@ -194,7 +194,6 @@ function postPhoto(formData){
             method: "POST",
             headers: {
                 Authorization: `JWT ${token}`,
-                "Content-Type": "application/json"
             },
             body: formData
         })
