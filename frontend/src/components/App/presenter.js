@@ -9,6 +9,7 @@ import Feed from "components/Feed";
 import Explore from "components/Explore";
 import DetailFeedPhoto from "components/DetailFeedPhoto";
 import ChangeCategory from "components/ChangeCategory";
+import AddPhoto from "components/AddPhoto";
 
 
 const App = props => [
@@ -27,6 +28,7 @@ const PrivateRoutes = props => (
         <Route exact path="/explore" component={Explore} />
         <Route exact path="/images/3/" component={DetailFeedPhoto} />
         <Route exact path="/changecategory/" component={ChangeCategory} />
+        <Route exact path="/add" component={AddPhoto} />
     </Switch>
 );
 

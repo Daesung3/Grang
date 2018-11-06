@@ -187,6 +187,25 @@ function getDetail(photoId){
     }
 }
 
+function postPhoto(formData){
+    console.log(formData);
+    return (dispatch, getState) => {
+        const { user: { token } } = getState(); //getState에서 user의 token을 받아옴.
+        fetch('/images', {
+            method: "POST",
+            headers: {
+                Authorization: `JWT ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+        });
+    }
+}
+
 // initial state 초깃값 설정
 
 const initialState = {};
@@ -287,8 +306,9 @@ const actionCreators = {
     likePhoto,
     unlikePhoto,
     commentPhoto,
+    postPhoto,
     getPhotoLikes,
-    getDetail
+    getDetail,
 };
 
 export { actionCreators };
