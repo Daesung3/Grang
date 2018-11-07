@@ -6,7 +6,7 @@ class AddPhoto extends Component {
     'location' : '',
     caption: '',
     category: '',
-    image: '',
+    file: '',
   }
   handleSubmit = e => {
     e.preventDefault();
@@ -14,23 +14,28 @@ class AddPhoto extends Component {
     const formData = new FormData();
 
     Object.keys(this.state).forEach(key => {
+      console.log(key);
       formData.append(key, this.state[key]);
     });
     onSubmit(formData);
   }
 
-  handleChange = ({ target : { value, name } }) => {
+  handleChange = ({ target : { name, value } }) => {
     this.setState({ [name]: value })
   }
+
+  handleChangeFile = ({ target : { name, files } }) => {
+    this.setState({ [name]: files[0] })
+  }
+
   render() {
     return (
       <div className="AddPhoto">
         <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="location" name='location' />
-          <input type="text" placeholder="caption" name='cation' />
-          <input type="text" placeholder="category" name='category' />
-          <input type="text" placeholder="tag" name='tag' />
-          <input type="file" name='file' />
+          <input type="text" placeholder="location" name='location' onChange={this.handleChange}/>
+          <input type="text" placeholder="caption" name='caption' onChange={this.handleChange}/>
+          <input type="text" placeholder="category" name='category' onChange={this.handleChange}/>
+          <input type="file" name='file' onChange={this.handleChangeFile}/>
           <input type="submit" />
         </form>
       </div>

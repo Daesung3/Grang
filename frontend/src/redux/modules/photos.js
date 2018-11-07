@@ -197,7 +197,7 @@ function postPhoto(formData){
             },
             body: formData
         })
-        .then(response => response.json())
+        .then(response => response.text())
         .then(json => {
             console.log(json);
         });
