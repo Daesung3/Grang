@@ -65,3 +65,11 @@ class ListUserSerializer(serializers.ModelSerializer):
             if obj in request.user.subscribe.all():
                 return True
         return False
+
+class ChangeCategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.User
+        fields = (
+            'category',
+        )

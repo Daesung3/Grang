@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Auth from "./presenter";
+//import Auth from "./presenter";
 
 class AddPhoto extends Component {
   state = {
-    'location' : '',
+    'location' : '', // 왜.. ?
     caption: '',
     category: '',
     file: '',

@@ -36,7 +36,7 @@ const FeedPhoto = (props, context) => {
                 comments={props.comments}
             />
             <TimeStamp time={props.natural_time} />
-            {/* <CommentBox photoId={props.id}/> */}
+            <CommentBox photoId={props.id}/> 
         </div>
         {props.seeingDetail && <DetailFeedPhoto closeDetail={props.closeDetail} />}
     </div>

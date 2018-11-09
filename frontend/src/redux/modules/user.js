@@ -8,6 +8,7 @@ const SET_USER_LIST = "SET_USER_LIST";
 const SUBSCRIBE_USER = "SUBSCRIBE_USER";
 const UNSUBSCRIBE_USER = "UNSUBSCRIBE_USER";
 const GET_CATEGORY = "GET_CATEGORY";
+const CHANEGE_CATEGORY = "CHANGE_CATEGORY";
 
 
 
@@ -53,6 +54,13 @@ function setCategory(category){
         type: GET_CATEGORY,
         category
     }
+}
+
+function setChangeCategory(category){
+    return {
+        type: CHANEGE_CATEGORY,
+        category
+    };
 }
 
 // API actions 비동기
@@ -188,17 +196,17 @@ function getPhotoLikes(photoId) {
 function getCategory(){
     return (dispatch, getState) => {
         const { user: { token } } = getState();
-        fetch(`/users/category`, {
+        fetch(`/users/category/`, {
           method: "GET",
           headers: {
               Authorization: `JWT ${token}`,
               "Content-Type": "application/json"
           },
       })
-      .then(response => {
-          if(response.status === 401){
+       .then(response => {
+          /* if(response.status === 401){
               dispatch(logout());
-          }
+          } */
             return response.json();
       })
       .then(json => {
@@ -207,7 +215,37 @@ function getCategory(){
     }
 }
 
-  
+function changeCategory(category){
+    /* return (dispatch, getState) => { */
+    return function (dispatch, getState) {
+        const { user: { token } } = getState(); //getState에서 user의 token을 받아옴.
+        fetch(`/users/setcategory/`, { //카테고리 바꾸는 view와 연결된 url
+            method: "PUT",
+            headers: {
+                Authorization: `JWT ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                category
+            })
+         
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(logout());
+            }
+            console.log(response)
+            return response.json();
+        })
+        .then(json => {
+            if(json){
+                dispatch(setChangeCategory(json));
+            }
+        });
+    }
+}
+
+
 
 
 // intial state
@@ -233,6 +271,8 @@ function reducer(state = intialState, action) {
             return applyUnsubscribeUser(state, action);
         case GET_CATEGORY:
             return applyGetCategory(state, action);
+        case CHANEGE_CATEGORY:
+            return applyChangeCategory(state, action);
         default:
             return state;
     }
@@ -297,7 +337,12 @@ function applyGetCategory(state, action) {
     };
 }
 
-
+function applyChangeCategory(state, action) {
+    return {
+        ...state,
+        category : action.category
+    };
+}
 
 // exports
 
@@ -309,7 +354,8 @@ const actionCreators = {
     getPhotoLikes,
     subscribeUser,
     unsubscribeUser,
-    getCategory
+    getCategory,
+    changeCategory
 };
 
 export { actionCreators };

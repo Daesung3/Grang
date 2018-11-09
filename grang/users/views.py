@@ -207,6 +207,31 @@ class FacebookLogin(SocialLoginView):
 class GetCategory(APIView):
 
     def get(self, request):
+        print(request.user.category)
         return Response(data={'category': request.user.category}, status=status.HTTP_200_OK)
 
-#def post():
+class SetCategory(APIView):
+
+    def get_user(self, username):
+
+        try:
+            found_user = models.User.objects.get(username=username)
+            return found_user
+        except models.User.DoesNotExist:
+            return None
+
+    def put(self, request, format=None):
+        found_user = self.get_user(request.user)
+        serializer = serializers.ChangeCategorySerializer(found_user, data=request.data, partial = True)
+        #partial = True 무조건 채워야하는 필드가 비어있더라도, 이전에 해당 필드가 차있었다면 그것을 차용한다는 의미이다.
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data={'category': serializer.data.get('category')}, status=status.HTTP_200_OK)
+            
+
+        else:
+
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        #return Response(data={'category': request.user.category}, status=status.HTTP_200_OK)

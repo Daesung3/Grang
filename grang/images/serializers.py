@@ -99,6 +99,7 @@ class InputImageSerializer(serializers.ModelSerializer):
             'file',
             'location',
             'caption',
+            'category'
         )
 
         

@@ -5,10 +5,18 @@ from . import models, serializers
 from grang.users import models as user_models
 from grang.users import serializers as user_serializers
 from grang.notifications import views as notification_views
-from django import forms
+from .forms import UploadFileForm 
 
 
 class Images(APIView):
+
+    def get_user(self, username):
+        try:
+            found_user = user_models.User.objects.get(username=username)
+            return found_user
+        except user_models.User.DoesNotExist:
+            return None
+
 
     def get(self, request, format=None):
 
@@ -17,20 +25,33 @@ class Images(APIView):
         subscribe_users = user.subscribe.all()
 
         image_list = []
+        found_user = self.get_user(user)
+        user_list = []
+        user_list.append(found_user.id)
+        for i in subscribe_users:
+            user_list.append(i.id)
+
+        found_images = models.Image.objects.filter(category=found_user.category)
+        
+        for i in found_images:
+            image_list.append(i)
+
+
+
 
         for subscribe_user in subscribe_users:
 
             user_images = subscribe_user.images.all()
 
             for image in user_images:
-
-                image_list.append(image)
+                if (image.category != found_user.category):
+                    image_list.append(image)
 
         my_images = user.images.all()
 
         for image in my_images:
-
-            image_list.append(image)    
+            if (image.category != found_user.category):
+                image_list.append(image)  
 
         sorted_list = sorted(
             image_list, key=lambda image: image.created_at, reverse=True)
@@ -40,10 +61,15 @@ class Images(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-
         user = request.user
 
+        print(request.data)
+        print(request.FILES)
+
+        form = UploadFileForm(request.POST, request.FILES)
         serializer = serializers.InputImageSerializer(data=request.data)
+
+
 
         if serializer.is_valid():
 
@@ -213,29 +239,6 @@ class ImageDetail(APIView):
             return image
         except models.Image.DoesNotExist:
             return None
-
-    def post(self, request, format=None): #이미지 수정하기 #1-65
-
-        user = request.user
-
-        print(request.POST)
-        print(requeset.FILES)
-
-        serializer = serializers.InputImageSerializer(image, data=request.data, partial=True)
-
-        #partial = True 무조건 채워야하는 필드가 비어있더라도, 이전에 해당 필드가 차있었다면 그것을 차용한다는 의미이다.
-
-        if serializer.is_valid():
-
-            serializer.save(creator=user)
-
-            return Response(data=serializer.data, status=status.HTTP_204_NO_CONTENT)
-
-        else:
-
-            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 
 
     def get(self, request, image_id, format=None):
