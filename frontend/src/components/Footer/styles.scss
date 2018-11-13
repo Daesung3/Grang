@@ -1,32 +1,25 @@
 .footer {
-    max-width: $max-page-width;
-    background-color: #325572;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-weight: 600;
-    font-size: 15px;
-    text-transform: uppercase;
-    margin: 55px auto;
-    flex-wrap: wrap;
+  background-color: #fbebea;
+  width: 85%;
+  display: flex;
+  align-content: flex-end;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: uppercase;
+  margin: 50px 30px 50px 105px;
+  flex-wrap: wrap;
+  .column {
     @include breakpoint("phone-tablet") {
-      justify-content: center;
-      max-width: 350px;
-      margin-bottom: 25px;
+      margin-bottom: 0;
     }
-    .column {
-      @include breakpoint("phone-tablet") {
-        margin-bottom: 0;
-      }
-      .copyright{
-        color: $contents-color;
-        font-size: 12px;
-      }
-      .product{
-        color: $contents-color;
-        font-size: 12px;
-      }
+    .copyright {
+      color: black;
+      font-size: 15px;
+    }
+    .product {
+      color: black;
+      font-size: 15px;
     }
   }
-  
+}
