@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import styles from "./styles.scss";
-//import Auth from "./presenter";
 
 class AddPhoto extends Component {
   state = {
-    location: "", // 왜.. ?
+    location: "",
     caption: "",
     category: "",
     file: ""
@@ -15,7 +14,6 @@ class AddPhoto extends Component {
     const formData = new FormData();
 
     Object.keys(this.state).forEach(key => {
-      console.log(key);
       formData.append(key, this.state[key]);
     });
     onSubmit(formData);
