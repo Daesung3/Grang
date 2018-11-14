@@ -15,7 +15,7 @@ const PhotoComments = props => (
         comment={props.caption}
         natural_time={props.natural_time}
       />
-      {props.comments.sort(cmp).map(comment => (
+      {props.comments.sort(cmp).reverse().map(comment => (
         <Comment
           creator={props.creator}
           username={comment.creator.username}
