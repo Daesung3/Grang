@@ -74,8 +74,9 @@ function getFeed() {
         })
         .then(json => {
             const yesterday = new Date();
-            yesterday.setDate(-1);
+            yesterday.setDate(yesterday.getDate() - 1);
             const feeds = json.filter( item => {
+                console.log(new Date(item.created_at) >=  yesterday);
                 return new Date(item.created_at) >= yesterday;
             });
             dispatch(setFeed(feeds));
