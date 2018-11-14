@@ -20,8 +20,10 @@ const FeedPhoto = (props, context) => {
               alt="a"
               className={styles.image}
             />
-            <span className={styles.userName}>{props.creator.username}</span>
-            <span className={styles.userLocation}>{props.location}</span>
+            <div>
+              <span className={styles.userName}>{props.creator.username}</span>
+              <span className={styles.userLocation}>{props.location}</span>
+            </div>
           </div>
           <div className={styles.cock}>
             <PhotoActions
