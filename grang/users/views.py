@@ -227,7 +227,7 @@ class SetCategory(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return Response(data={'category': serializer.data.get('category')}, status=status.HTTP_200_OK)
+            return Response(data=serializer.data.get('category'), status=status.HTTP_200_OK)
             
 
         else:

@@ -5,6 +5,10 @@ import Styles from "./styles.scss";
 
 const ChangeCategory = props => (
   <div className={Styles.formComponent}>
+    <div className={Styles.nowCategory}>
+      <h4>현재 카테고리</h4>
+      <h3>{props.category}</h3>
+    </div>
     <form className={Styles.form} onSubmit={props.handleSubmit}>
       <input
         type="text"
@@ -14,7 +18,13 @@ const ChangeCategory = props => (
         name="category"
         value={props.categoryValue}
       />
-      <input type="submit" className={Styles.button} />
+      <button
+        type="submit"
+        placeholder="카테고리 바꾸기"
+        className={Styles.button}
+      >
+        카테고리 바꾸기
+      </button>
     </form>
   </div>
 ); /* 
