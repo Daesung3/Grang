@@ -21,8 +21,8 @@ const FeedPhoto = (props, context) => {
               className={styles.image}
             />
             <div>
-              <span className={styles.userName}>{props.creator.username}</span>
-              <span className={styles.userLocation}>{props.location}</span>
+              <div className={styles.userName}>{props.creator.username}</div>
+              <div className={styles.userLocation}>{props.location}</div>
             </div>
           </div>
           <div className={styles.cock}>

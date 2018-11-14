@@ -22,8 +22,6 @@
       justify-content: space-between;
       align-items: center;
       .userInfo {
-        display: inline-flex;
-        align-items: center;
       }
       .userName {
         font-size: 13px;
@@ -36,6 +34,7 @@
       .image {
         width: 30px;
         height: 30px;
+        margin-right: 10px;
         border-radius: 50%;
       }
     }
