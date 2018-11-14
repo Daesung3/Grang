@@ -1,6 +1,9 @@
 .comments {
-  margin-bottom: 12px;
+  padding-bottom: 12px;
+  height: 100%;
+  box-sizing: border-box;
   .list {
+    height: 100%;
     overflow: scroll;
   }
 }
