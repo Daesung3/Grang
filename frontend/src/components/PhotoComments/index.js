@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./styles.scss";
 
 const cmp = (a,b) => {
-  reutnr new Date(a.natural_time) - new Date(b.natural_time);
+  return new Date(b.natural_time) - new Date(a.natural_time);
 }
 
 const PhotoComments = props => (
