@@ -6,12 +6,14 @@ const PhotoComments = props => (
   <div className={styles.comments}>
     <ul className={styles.list}>
       <Comment
+        creator={props.creator}
         username={props.creator}
         comment={props.caption}
         natural_time={props.natural_time}
       />
       {props.comments.map(comment => (
         <Comment
+          creator={props.creator}
           username={comment.creator.username}
           comment={comment.message}
           natural_time={comment.natural_time}
@@ -23,9 +25,15 @@ const PhotoComments = props => (
 );
 
 const Comment = props => (
-  <li className={styles.comment}>
+  <li className={`${styles.comment} ${props.username === props.creator ? styles.me : ''}`}>
     <span className={styles.username}>{props.username}</span>
-    <span className={styles.message}>{props.comment}</span>
+    <div className={styles.message}>
+      <div className={styles.messageCaret}>
+        <div className={styles.messageCaretOuter} />
+        <div className={styles.messageCaretInner} />
+      </div>
+      <span className={styles.messageBody}>{props.comment}</span>
+    </div>
     <span className={styles.natural_time}>{props.natural_time}</span>
   </li>
 );
