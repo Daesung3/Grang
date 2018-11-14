@@ -1,18 +1,36 @@
-.form{
-    background-color: white;
-    margin-left: 130px;
-    margin-right: 130px;
-    margin-top: 50px;
-    color: $contents-color;
-    font-size: $big-font-size;
+.form {
+  width: 40%;
+  margin-left: 380px;
+  .text-input {
+    border-radius: 3px;
+    width: 100%;
+    padding-bottom: 25px;
     text-align: center;
-    .formComponent{
-        margin-bottom: 50px;
-        padding-bottom: 50px;
-        .input{
-            position: center;
-            
-        }
+    border: none;
+    background-color: white;
+    margin-bottom: 5px;
+    font-size: $normal-font-size;
+    padding: 9px 0 7px 8px;
+    font-weight: 400;
+    border-bottom: 1px solid black;
+    color: $contents-color;
+    #file {
+      padding-left: 100px;
     }
+    &:focus {
+      outline: none;
+      border-bottom: 3px ridge $contents-color;
+    }
+  }
+  .button {
+    @include blueButton();
+    i {
+      font-size: 18px;
+      margin-right: 10px;
+    }
+    background-color: $contents-color; // Login Button Color
+  }
+  input {
+    display: block;
+  }
 }
-

@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import Styles from './styles.scss'
+import React, { Component } from "react";
+import Styles from "./styles.scss";
 // constructor >> render >> componentDidMount
 // props : 부모, index로부터 받는거 , state : 내가 가진거
 
 const ChangeCategory = props => (
-    <div className={Styles.formComponent}>
-        <form className={Styles.form} onSubmit={props.handleSubmit}>
-            <input
-                type="text"
-                placeholder="Category"
-                className={Styles.textInput}
-                onChange={props.handleInputChange}
-                name="category"
-                value={props.categoryValue}
-                />
-            <input type="submit" className={Styles.button} />
-        </form>
-    </div>
-)/* 
+  <div className={Styles.formComponent}>
+    <form className={Styles.form} onSubmit={props.handleSubmit}>
+      <input
+        type="text"
+        placeholder="Category"
+        className={Styles.textInput}
+        onChange={props.handleInputChange}
+        name="category"
+        value={props.categoryValue}
+      />
+      <input type="submit" className={Styles.button} />
+    </form>
+  </div>
+); /* 
 class ChangeCategory extends Component {
     constructor(props) {
         super(props);

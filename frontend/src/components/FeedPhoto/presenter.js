@@ -9,71 +9,82 @@ import UserList from "components/UserList";
 import DetailFeedPhoto from "components/DetailFeedPhoto";
 
 const FeedPhoto = (props, context) => {
-    return (
+  return (
     <div className={styles.feedPhoto}>
-        <header className={styles.header}>
-            <img
-                src={props.creator.profile_image || require("images/noPhoto.png")}
-                alt={props.creator.username}
-                className={styles.image}
-            />
-            <div className={styles.headerColumn}>
-                <span>{props.creator.username}</span>
-                <span>{props.location}</span>
-            </div>
-        </header>
+      <div className={styles.mainImage}>
         <img className={styles.file} src={props.file} alt={props.caption} />
+      </div>
+      <div className={styles.mainChat}>
+        <header className={styles.header}>
+          <div className={styles.userInfo}>
+            <img
+              src={props.creator.profile_image || require("images/noPhoto.png")}
+              alt="a"
+              className={styles.image}
+            />
+            <span className={styles.userName}>{props.creator.username}</span>
+            <span className={styles.userLocation}>{props.location}</span>
+          </div>
+          <div className={styles.cock}>
+            <PhotoActions
+              number={props.like_count}
+              isLiked={props.is_liked}
+              photoId={props.id}
+              openLikes={props.openLikes}
+            />
+          </div>
+        </header>
         <div className={styles.meta}>
-            <PhotoActions 
-            number={props.like_count} 
-            isLiked={props.is_liked} 
-            photoId={props.id}
-            openLikes={props.openLikes}
-            />
-            <PhotoComments 
-                caption={props.caption}
-                creator={props.creator.username}
-                comments={props.comments}
-            />
-            <TimeStamp time={props.natural_time} />
-            <CommentBox photoId={props.id}/> 
+          <PhotoComments
+            caption={props.caption}
+            creator={props.creator.username}
+            comments={props.comments}
+          />
+          <TimeStamp time={props.natural_time} />
         </div>
-        {props.seeingDetail && <DetailFeedPhoto closeDetail={props.closeDetail} />}
+        <div className={styles.commentBox}>
+          <CommentBox photoId={props.id} />
+        </div>
+        {props.seeingDetail && (
+          <DetailFeedPhoto closeDetail={props.closeDetail} />
+        )}
+      </div>
     </div>
-    );
+  );
 };
 
 FeedPhoto.contextTypes = {
-    t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired
 };
 
 FeedPhoto.propTypes = {
-    creator: PropTypes.shape({
+  creator: PropTypes.shape({
+    propfile_image: PropTypes.string,
+    username: PropTypes.string.isRequired
+  }).isRequired,
+  location: PropTypes.string.isRequired,
+  file: PropTypes.string.isRequired,
+  like_count: PropTypes.number.isRequired,
+  caption: PropTypes.string.isRequired,
+  comments: PropTypes.arrayOf(
+    //피드에서 보이는 댓글 부분
+    PropTypes.shape({
+      message: PropTypes.string.isRequired,
+      creator: PropTypes.shape({
         propfile_image: PropTypes.string,
-        username: PropTypes.string.isRequired
-    }).isRequired,
-    location: PropTypes.string.isRequired,
-    file: PropTypes.string.isRequired,
-    like_count: PropTypes.number.isRequired,
-    caption: PropTypes.string.isRequired,
-    comments: PropTypes.arrayOf( //피드에서 보이는 댓글 부분
-        PropTypes.shape({
-            message: PropTypes.string.isRequired,
-            creator: PropTypes.shape({
-                propfile_image: PropTypes.string,
-                username: PropTypes.string.isRequired,
-                name: PropTypes.string
-            }).isRequired
-        })            
-    ).isRequired,
-    natural_time: PropTypes.string.isRequired,
-    is_liked: PropTypes.bool.isRequired,
-    seeingLikes: PropTypes.bool.isRequired,
-    closeLikes: PropTypes.func.isRequired,
-    openLikes: PropTypes.func.isRequired,
-    seeingDetail: PropTypes.bool.isRequired,
-    openDetail: PropTypes.func.isRequired,
-    closeDetail: PropTypes.func.isRequired
+        username: PropTypes.string.isRequired,
+        name: PropTypes.string
+      }).isRequired
+    })
+  ).isRequired,
+  natural_time: PropTypes.string.isRequired,
+  is_liked: PropTypes.bool.isRequired,
+  seeingLikes: PropTypes.bool.isRequired,
+  closeLikes: PropTypes.func.isRequired,
+  openLikes: PropTypes.func.isRequired,
+  seeingDetail: PropTypes.bool.isRequired,
+  openDetail: PropTypes.func.isRequired,
+  closeDetail: PropTypes.func.isRequired
 };
 
 export default FeedPhoto;

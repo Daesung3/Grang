@@ -1,13 +1,14 @@
 import React, { Component } from "react";
+import styles from "./styles.scss";
 //import Auth from "./presenter";
 
 class AddPhoto extends Component {
   state = {
-    'location' : '', // 왜.. ?
-    caption: '',
-    category: '',
-    file: '',
-  }
+    location: "", // 왜.. ?
+    caption: "",
+    category: "",
+    file: ""
+  };
   handleSubmit = e => {
     e.preventDefault();
     const { onSubmit } = this.props;
@@ -18,25 +19,49 @@ class AddPhoto extends Component {
       formData.append(key, this.state[key]);
     });
     onSubmit(formData);
-  }
+  };
 
-  handleChange = ({ target : { name, value } }) => {
-    this.setState({ [name]: value })
-  }
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
+  };
 
-  handleChangeFile = ({ target : { name, files } }) => {
-    this.setState({ [name]: files[0] })
-  }
+  handleChangeFile = ({ target: { name, files } }) => {
+    this.setState({ [name]: files[0] });
+  };
 
   render() {
     return (
-      <div className="AddPhoto">
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="location" name='location' onChange={this.handleChange}/>
-          <input type="text" placeholder="caption" name='caption' onChange={this.handleChange}/>
-          <input type="text" placeholder="category" name='category' onChange={this.handleChange}/>
-          <input type="file" name='file' onChange={this.handleChangeFile}/>
-          <input type="submit" />
+      <div className={styles.addPhoto}>
+        <form className={styles.form} onSubmit={this.handleSubmit}>
+          <input
+            className={styles.textInput}
+            type="text"
+            placeholder="location"
+            name="location"
+            onChange={this.handleChange}
+          />
+          <input
+            className={styles.textInput}
+            type="text"
+            placeholder="caption"
+            name="caption"
+            onChange={this.handleChange}
+          />
+          <input
+            className={styles.textInput}
+            type="text"
+            placeholder="category"
+            name="category"
+            onChange={this.handleChange}
+          />
+          <input
+            className={styles.textInput}
+            id={styles.file}
+            type="file"
+            name="file"
+            onChange={this.handleChangeFile}
+          />
+          <button>게시물 올리기</button>
         </form>
       </div>
     );
