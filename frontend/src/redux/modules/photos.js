@@ -323,7 +323,7 @@ function applyAddComment(state, action) {
     if (photo.id === photoId) {
       return {
         ...photo,
-        comments: [...photo.comments, { ...comment, natural_time: new Date() }] //이전 댓글 + 새 댓글
+        comments: [...photo.comments, { ...comment, nature_time: new Date() }] //이전 댓글 + 새 댓글
       };
     }
     return photo;
