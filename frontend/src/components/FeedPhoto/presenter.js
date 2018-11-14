@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./styles.scss";
 import PhotoActions from "components/PhotoActions";
 import PhotoComments from "components/PhotoComments";
-import TimeStamp from "components/TimeStamp";
 import CommentBox from "components/CommentBox";
-import UserList from "components/UserList";
 import DetailFeedPhoto from "components/DetailFeedPhoto";
 
 const FeedPhoto = (props, context) => {
@@ -36,11 +34,11 @@ const FeedPhoto = (props, context) => {
         </header>
         <div className={styles.meta}>
           <PhotoComments
+            natural_time={props.natural_time}
             caption={props.caption}
             creator={props.creator.username}
             comments={props.comments}
           />
-          <TimeStamp time={props.natural_time} />
         </div>
         <div className={styles.commentBox}>
           <CommentBox photoId={props.id} />

@@ -6,6 +6,8 @@ class Container extends Component {
     seeingLikes: false
   };
   render() {
+    console.log(this.state);
+    console.log(this.props);
     return (
       <FeedPhoto
         {...this.props}

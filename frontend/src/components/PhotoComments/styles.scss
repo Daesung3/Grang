@@ -4,6 +4,10 @@
   }
 }
 .comment {
+  display: flex;
+  &.me {
+    flex-direction: row-reverse;
+  }
   margin-bottom: 7px;
   color: black;
   .username {
