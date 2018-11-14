@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./styles.scss";
 
+const cmp = (a,b) => {
+  reutnr new Date(a.natural_time) - new Date(b.natural_time);
+}
+
 const PhotoComments = props => (
   <div className={styles.comments}>
     <ul className={styles.list}>
@@ -11,7 +15,7 @@ const PhotoComments = props => (
         comment={props.caption}
         natural_time={props.natural_time}
       />
-      {props.comments.map(comment => (
+      {props.comments.sort(cmp).map(comment => (
         <Comment
           creator={props.creator}
           username={comment.creator.username}
