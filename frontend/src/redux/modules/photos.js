@@ -143,6 +143,42 @@ function unlikePhoto(photoId) {
   };
 }
 
+function photoModify(photoId) {
+  return (dispatch, getState) => {
+    const {
+      user: { token }
+    } = getState();
+    fetch(`/images/${photoId}/modify/`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    }).then(response => {
+      if (response.status === 204) {
+        dispatch(getFeed());
+      }
+    });
+  };
+}
+
+function photoForModify(photoId) {
+  return (dispatch, getState) => {
+    const {
+      user: { token }
+    } = getState();
+    fetch(`/images/${photoId}/formodify/`, {
+      method: "PUT",
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    }).then(response => {
+      if (response.status === 204) {
+        dispatch(getFeed());
+      }
+    });
+  };
+}
+
 function commentPhoto(photoId, message) {
   return (dispatch, getState) => {
     const {
@@ -202,14 +238,12 @@ function getDetail(photoId) {
       user: { token }
     } = getState(); //getState에서 user의 token을 받아옴.
     fetch(`/images/${photoId}/`, {
-      method: "GET",
+      method: "find_own_image",
       headers: {
         Authorization: `JWT ${token}`,
         "Content-Type": "application/json"
       }
-    })
-      .then(response => response.json())
-      .then(json => console.log(json));
+    }).then(json => console.log(json));
   };
 }
 
@@ -359,7 +393,9 @@ const actionCreators = {
   commentPhoto,
   postPhoto,
   getPhotoLikes,
-  getDetail
+  getDetail,
+  photoModify,
+  photoForModify
 };
 
 export { actionCreators };

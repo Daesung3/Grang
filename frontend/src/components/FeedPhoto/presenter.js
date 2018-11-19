@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import styles from "./styles.scss";
 import PhotoActions from "components/PhotoActions";
 import PhotoComments from "components/PhotoComments";
+import PhotoOptions from "components/PhotoOptions";
 import CommentBox from "components/CommentBox";
 import DetailFeedPhoto from "components/DetailFeedPhoto";
+import { request } from "http";
 
 const FeedPhoto = (props, context) => {
   return (
@@ -32,6 +34,7 @@ const FeedPhoto = (props, context) => {
               photoId={props.id}
               openLikes={props.openLikes}
             />
+            <PhotoOptions photoId={props.id} creator={props.creator.username} />
           </div>
         </header>
         <div className={styles.meta}>

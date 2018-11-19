@@ -223,7 +223,7 @@ class SetCategory(APIView):
     def put(self, request, format=None):
         found_user = self.get_user(request.user)
         serializer = serializers.ChangeCategorySerializer(found_user, data=request.data, partial = True)
-        #partial = True 무조건 채워야하는 필드가 비어있더라도, 이전에 해당 필드가 차있었다면 그것을 차용한다는 의미이다.
+    
 
         if serializer.is_valid():
             serializer.save()

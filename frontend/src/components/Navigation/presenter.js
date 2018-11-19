@@ -27,11 +27,11 @@ const Navigation = (props, context) => (
             <Ionion icon="md-add" fontSize="28px" color="black" />
           </Link>
         </div>
-        <div className={styles.navIcon}>
+        {/*    <div className={styles.navIcon}>
           <Link to="/profile">
             <Ionion icon="md-person" fontSize="32px" color="black" />
           </Link>
-        </div>
+        </div> */}
         <div className={styles.navIcon} onClick={props.onClickLogout}>
           <Ionion icon="md-log-out" fontSize="28px" color="black" />
         </div>

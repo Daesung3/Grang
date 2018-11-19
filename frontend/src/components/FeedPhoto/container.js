@@ -8,6 +8,7 @@ class Container extends Component {
   render() {
     console.log(this.state);
     console.log(this.props);
+
     return (
       <FeedPhoto
         {...this.props}

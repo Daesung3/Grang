@@ -230,12 +230,21 @@ class ModerateComments(APIView):
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class ImageModify(APIView):
 
+    def put(self, image_id, request, format=None):
+        try:
+            image = models.Image.objects.get(id=image_id)
+            return image
+        except models.Image.DoesNotExist:
+            return None
+
+     
 class ImageDetail(APIView):
 
     def find_own_image(self, image_id, user):
         try:
-            image = models.Image.objects.get(id=image_id, creator=user) #유저 검사, 접속한 아이디와 이미지 생성자가 일치해야만 수정할 수 있음,
+            image = models.Image.objects.get(id=image_id, creator=user)
             return image
         except models.Image.DoesNotExist:
             return None
@@ -260,6 +269,8 @@ class ImageDetail(APIView):
         user = request.user
 
         image = self.find_own_image(image_id, user)
+
+        print("OK?")
 
         if image is None:
 

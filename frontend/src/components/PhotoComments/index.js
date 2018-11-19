@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./styles.scss";
 
-const cmp = (a,b) => {
-  return new Date(b.natural_time) - new Date(a.natural_time);
-}
+const cmp = (a, b) => {
+  return new Date(a.natural_time) - new Date(b.natural_time);
+};
 
 const PhotoComments = props => (
   <div className={styles.comments}>
@@ -29,7 +29,11 @@ const PhotoComments = props => (
 );
 
 const Comment = props => (
-  <li className={`${styles.comment} ${props.username === props.creator ? styles.me : ''}`}>
+  <li
+    className={`${styles.comment} ${
+      props.username === props.creator ? styles.me : ""
+    }`}
+  >
     <span className={styles.username}>{props.username}</span>
     <div className={styles.message}>
       <div className={styles.messageCaret}>
